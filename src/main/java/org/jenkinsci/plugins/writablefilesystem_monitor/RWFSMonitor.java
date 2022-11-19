@@ -12,6 +12,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.logging.Logger;
 
 import static java.lang.Boolean.TRUE;
@@ -44,7 +45,7 @@ public class RWFSMonitor extends NodeMonitor {
     protected static final class CanWrite implements Callable<Boolean, IOException> {
 
         public Boolean call() throws IOException {
-            File f = File.createTempFile("monitor", "empty");
+            File f = Files.createTempFile("monitor", "empty").toFile();
             f.delete();
             return TRUE;
         }
